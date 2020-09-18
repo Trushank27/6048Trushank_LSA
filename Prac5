@@ -1,0 +1,47 @@
+                                           Practical 5
+
+	Install Samba to share folder or files between Windows and Linux.
+
+Theory:
+
+  -The Samba server can be defined as one of the most powerful server in Linux that enables us to connect various resources.
+  -The main purpose of this server is to share the files or the printers so that they could be used efficiently.
+
+
+Steps :
+
+1) Install the samba package
+     >>sudo apt-get update
+     >>sudo apt-get install samba
+
+2) Create a directory for it to share
+     >>mkdir /home/kali/xyz/
+
+   Create two or three files to test
+
+3) The configuration file. Have to add the directory we want to share.
+    >>sudo nano /etc/samba/smb.conf
+
+   Add this to the end of the file.
+
+   [sambashare]
+      comment = Samba on Ubuntu
+      path = /home/username/abc
+      read only = no
+      browsable = yes
+
+4) Start/Restart the service
+    >>sudo service smbd restart
+
+5) Allow samba through the firewall
+    >>sudo ufw allow samba
+
+6) Setting up User Account
+    >>sudo smbpasswd -a kali
+
+
+7) Open the file explorer and type
+ 
+    smb://<ip-address>/<shared_file>
+
+i.e smb://127.0.0.1/xyz
